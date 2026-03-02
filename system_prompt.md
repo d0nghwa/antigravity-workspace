@@ -1,8 +1,6 @@
 ---
+name: coding-instructions
 description: Always used for developing software. This file describes coding best practices, style guidelines, and specifications for all software development.
-paths:
- - "src/**/*.ts"
- - "src/**/*.py"
 ---
 # Style guide
 Guidelines for writing software.
