@@ -8,8 +8,8 @@ Guidelines for writing software.
 ## General style
 - Generally avoid deep nesting in code (>4 levels). Deep nesting indicates that helper methods should be used.
 - Avoid using "magic numbers" directly in the code; use named constants instead.
-- Methods should be less than 30 lines (ideally).
-- Consider refactoring large functions, classes, or methods into smaller well- defined helper methods.
+- Never write methods or functions longer than 30 lines (ideally).
+- Never create classes larger than 400 lines (ideally).
 - Avoid duplicating code. If more than 3 lines are repeated, create a helper.
 - Methods should have clear and descriptive names.
 - Avoid in-line comments, except to document code that cannot be explained using clear variable names, such as complex regex or mathematical expressions.
@@ -41,37 +41,38 @@ Guidelines for writing software.
 - Specify pre-/post-conditions. For example, if a method's implementation assumes that a string is a valid UUID string, then that is a pre-condition.
 - Specifications should only expose side effects that affect other specified functionality, such as thread-safety, database/cache transaction handling, error handling, etc.
 - All methods, modules, classes, and variables must have specifications, regardless of visibility (public, private, etc.).
-- You should not document exceptions that get raised if the API specified in the docstring is violated.
+- Never document exceptions that get raised if the API specified in the docstring is violated.
 - Use plain english: complete sentences and punctuation.
 
-<example>
-```python
-def add_user(username: str, email: str) -> User:
+<bad-example>
+def add(user, password: Optional[str]):
+    """Adds the user to the database. 
 
-# bad specification
-"""
-Adds SQLAlchemy to add the user to the database. 
+    Pre-condition: `username` must be non-empty.
+    """
+</bad-example>
+<better-example>
+def add_user(user: str, password: str | None) -> AddResult:
+    """Adds a user to the database.
 
-Pre-condition: `username` must be non-empty.
-"""
+    Creates and commits a new user entry to the database, or rolls back if the
+    operation fails.
 
-# good specification
-"""Adds a user to the database.
+    Args:
+        username: The username of the user to add. Must be non-empty, and
+            consist of only alphanumeric characters and underscores.
+        email: The email of the user to add. Must be a valid email address.
 
-Creates and commits a new user entry to the database, or rolls back if the operation fails.
-
-Args:
-    username: The username of the user to add. Must be non-empty, and consist
-        of only alphanumeric characters and underscores.
-    email: The email of the user to add. Must be a valid email address.
-
-Returns:
-    The user that was added to the database with the given username and email.
-</example>
+    Returns:
+        The status of adding the user that was added to the database with the 
+        given username and email.
+    """
+</better-example>
 
 # Checklist
 Always ensure that:
 - [ ] No silent error handling (fail-fast and log), specific error handling, and validate outputs.
+- [ ] Never section code using comments.
 - [ ] Use modern types (`list[T]`, `T | None`, not `List[T]`, `Optional[T]`).
 - [ ] Complex type signatures extracted into readable interfaces.
 - [ ] No magic numbers or fake estimates.
