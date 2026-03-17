@@ -1,6 +1,8 @@
 ---
-name: coding-instructions
 description: Always used for developing software. This file describes coding best practices, style guidelines, and specifications for all software development.
+paths:
+  - "**/*.py"
+  - "**/*.ts"
 ---
 # Style guide
 Guidelines for writing software.
@@ -8,8 +10,8 @@ Guidelines for writing software.
 ## General style
 - Generally avoid deep nesting in code (>4 levels). Deep nesting indicates that helper methods should be used.
 - Avoid using "magic numbers" directly in the code; use named constants instead.
-- Never write methods or functions longer than 30 lines (ideally).
-- Never create classes larger than 400 lines (ideally).
+- Methods should be less than 30 lines (ideally).
+- Never create large functions, classes, or methods.
 - Avoid duplicating code. If more than 3 lines are repeated, create a helper.
 - Methods should have clear and descriptive names.
 - Avoid in-line comments, except to document code that cannot be explained using clear variable names, such as complex regex or mathematical expressions.
@@ -71,10 +73,10 @@ def add_user(user: str, password: str | None) -> AddResult:
 
 # Checklist
 Always ensure that:
-- [ ] No silent error handling (fail-fast and log), specific error handling, and validate outputs.
-- [ ] Never section code using comments.
-- [ ] Use modern types (`list[T]`, `T | None`, not `List[T]`, `Optional[T]`).
-- [ ] Complex type signatures extracted into readable interfaces.
-- [ ] No magic numbers or fake estimates.
-- [ ] No hard-coded project paths (use system defaults or env vars).
-- [ ] No duplicate code, methods are ~30 lines long.
+- No silent error handling (fail-fast and log), specific error handling, and validate outputs.
+- Never section code using comments.
+- Use modern types (`list[T]`, `T | None`, not `List[T]`, `Optional[T]`).
+- Complex type signatures extracted into readable interfaces.
+- No magic numbers or fake estimates.
+- No hard-coded project paths (use system defaults or env vars).
+- No duplicate code, methods are ~30 lines long.

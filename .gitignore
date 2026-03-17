@@ -1,2 +1,13 @@
 antigravity/
 .*cache
+backups
+debug
+file-history
+history.jsonl
+ide
+plans
+plugins
+*~
+shell-snapshots
+usage-data
+projects
