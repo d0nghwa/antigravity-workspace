@@ -13,7 +13,10 @@
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:ai.google.dev)",
       "WebFetch(domain:developers.google.com)",
-      "Bash(uv pip:*)"
+      "Bash(uv pip:*)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [
       "Read(./.env)",
@@ -36,7 +39,7 @@
     ],
     "effortLevel": "high"
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "hooks": {
     "Stop": [
       {
@@ -49,5 +52,20 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "commit-commands@claude-code-plugins": true,
+    "code-review@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
   }
 }
