@@ -40,19 +40,6 @@
     "effortLevel": "high"
   },
   "model": "opus[1m]",
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/lint.sh",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "commit-commands@claude-code-plugins": true,
     "code-review@claude-plugins-official": true,
