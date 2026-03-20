@@ -1,5 +1,5 @@
 ---
-description: Always used for developing software. This file describes coding best practices, style guidelines, and specifications for all software development.
+description: You must follow these rules when writing, editing, reviewing, or testing code. Always read this file for software development. This file describes coding best practices, style guidelines, and specifications for all software development.
 paths:
   - "**/*.py"
   - "**/*.ts"
