@@ -39,26 +39,36 @@ Guidelines for writing software.
 
 ## Specification styles
 - A specification should give enough information to write a call to the function without reading the function’s code. Specifications should document behaviour, not underlying implementation details.
-- Important details of a function’s implementation that are not relevant to the caller should be comments alongside the code rather than in the specification, such as bug workarounds, regex, etc.
-- Specify pre-/post-conditions. For example, if a method's implementation assumes that a string is a valid UUID string, then that is a pre-condition.
-- Specifications should only expose side effects that affect other specified functionality, such as thread-safety, database/cache transaction handling, error handling, etc.
+- Never document irrelevant implementation details in the specification, such as bug workarounds, regex, etc.
+- Specify pre-/post-conditions. For example, if a method's implementation assumes a string is a valid UUID, then list that pre-condition in the arguments.
+- Always document expose side effects that affect other specified functionality, such as thread-safety, database/cache transaction handling, error handling, etc.
 - All methods, modules, classes, and variables must have specifications, regardless of visibility (public, private, etc.).
 - Never document exceptions that get raised if the API specified in the docstring is violated.
+- Never specify exceptions that are not thrown explicitly. If a method is not thrown within the method body, do not specify it in the spec.
 - Use plain english: complete sentences and punctuation.
 
 <bad-example>
 def add(user, password: Optional[str]):
     """Adds the user to the database. 
 
-    Pre-condition: `username` must be non-empty.
+    Pre-condition: `user` must be non-empty.
+
+    Raises:
+      Exception: If `user` is empty.
     """
 </bad-example>
+
+Bad specification explanation:
+- Incorrect or outdated type annotations.
+- Pre-condition is unclear and has its own `Pre-condition` section, which is unstandard.
+- Generic exception type and errors should not be specified for violating the API contract.
+
 <better-example>
 def add_user(user: str, password: str | None) -> AddResult:
     """Adds a user to the database.
 
     Creates and commits a new user entry to the database, or rolls back if the
-    operation fails.
+    operation fails. This method is thread-safe and can be called concurrently.
 
     Args:
         username: The username of the user to add. Must be non-empty, and
