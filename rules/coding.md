@@ -22,8 +22,8 @@ Guidelines for writing software.
 
 ## Typing
 - Always use type annotations. Never omit typing or use `any`/`Any` types unless creating generics code.
-- Always use modern union types `X | Y` instead of `Union[X, Y]`.
-- Use built-in generics such as `list[str]`, `dict[str, int]`. Never use `Tuple` or `Dict`.
+- Always use modern union types `X | Y`.
+- Use built-in generics such as `list[str]`, `dict[str, int]`.
 - Use specific return types (not `tuple`, use `tuple[Path, int]`)
 - If a type signature is complex, repeated, or hard to read, extract it into a named type/type alias.
 - Consolidate method parameters into a single type interface or dataclass when there are 3+ fields that are repeated in multiple signatures.
@@ -80,13 +80,3 @@ def add_user(user: str, password: str | None) -> AddResult:
         given username and email.
     """
 </better-example>
-
-# Checklist
-Always ensure that:
-- No silent error handling (fail-fast and log), specific error handling, and validate outputs.
-- Never section code using comments.
-- Use modern types (`list[T]`, `T | None`, not `List[T]`, `Optional[T]`).
-- Complex type signatures extracted into readable interfaces.
-- No magic numbers or fake estimates.
-- No hard-coded project paths (use system defaults or env vars).
-- No duplicate code, methods are ~30 lines long.
